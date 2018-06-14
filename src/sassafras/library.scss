@@ -1,0 +1,140 @@
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+$colors: (
+	'light': (
+		hsla(0, 0%, 99%, 1),
+		hsla(0, 0%, 90%, 1),
+		hsla(0, 0%, 80%, 1),
+	),
+	'neutral': (
+		hsla(0, 0%, 60%, 1),
+		hsla(0, 0%, 40%, 1),
+		hsla(0, 0%, 30%, 1),
+	),
+	'dark': (
+		hsla(0, 0%, 12%, 1),
+		hsla(0, 0%, 8%, 1),
+		hsla(0, 0%, 5%, 1),
+	),
+);
+
+$sizes: (
+	// Small Sizing
+	'xxs': baseline(3/8),
+	'xs': baseline(1/2),
+	's': baseline(5/8),
+	'm': baseline(3/4),
+	'l': baseline(1),
+	'xl': baseline(1.25),
+	'xxl': baseline(2),
+
+	// Ratios
+	'1-12': 8.33%,
+	'1-8': 12.5%,
+	'1-6': 16.66%,
+	'1-4': 25%,
+	'1-3': 33.33%,
+	'1-2': 50%,
+	'2-3': 66.66%,
+	'3-4': 75%,
+	'1-1': 100%,
+);
+
+// SVG stroke-width property doesn't accept rem values in Safari - use pixels
+$lines: (
+	'xxs': 1px,
+	'xs': 2px,
+	's': 3px,
+	'm': 4px,
+	'l': 5px,
+	'xl': 6px,
+	'xxl': 7px,
+);
+
+// Layer comments are relative to the document
+$layers: (
+	'tippy-top': 9999, // Modal
+	'top': 8888, // Header
+	'mid-top': 7777,
+	'middle': 5555,
+	'mid-bottom': 3333,
+	'bottom': 0, // Body
+);
+
+
+$breakpoints: (
+	'xs': 320px,
+	's': 464px,
+	'm': 768px,
+	'l': 1024px,
+	'xl': 1280px,
+	'sitewidth': 1400px,
+);
+
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,700');
+
+// Fonts
+$fonts: (
+	body: ('Source Code Pro', sans-serif),
+	heading: ('Source Code Pro', sans-serif)
+);
+
+// Typography
+$typography: (
+	p: (
+		font-family: font(body),
+		font-size: size(xs),
+		line-height: size(s),
+		margin: 0
+	),
+	fine: (
+		font-family: font(body),
+		font-size: size(xxs),
+		line-height: size(xxs)
+	),
+	label: (
+		font-family: font(body),
+		font-size: size(xs),
+		line-height: size(s),
+		margin: 0,
+		text-transform: uppercase,
+		letter-spacing: line(s),
+		font-weight: 900
+	),
+	h1: (
+		font-family: font(heading),
+		font-size: size(xl),
+		line-height: size(xl)
+	),
+	h2: (
+		font-family: font(heading),
+		font-size: size(l),
+		line-height: size(xl)
+	),
+	h3: (
+		font-family: font(heading),
+		font-size: size(m),
+		line-height: size(xl)
+	),
+	h4: (
+		font-family: font(heading),
+		font-size: size(s),
+		line-height: size(m)
+	),
+	h5: (
+		font-family: font(heading),
+		font-size: size(xs),
+		line-height: size(xs)
+	),
+	h6: (
+		font-family: font(heading),
+		font-size: size(xxs),
+		line-height: size(xxs)
+	),
+);
