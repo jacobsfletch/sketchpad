@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
-import ArrowIcon from '../../icons/arrow'
+//import ArrowIcon from '../../icons/arrow'
 
-//import Input from '../../fields/input'
-import DoodleForm from '../../forms/doodle'
-
-import './index.css'
+//import './Sketchpad.css'
 
 const mapStateToProps = state => {
 	return {
@@ -155,13 +151,11 @@ class DoodleView extends Component {
 					<button onClick={(e) => this.setCanvasSize()}>&nbsp;clear&nbsp;</button>
 					<a onClick={(e) => this.sendSketch(e)}>
 						<p className="button-title">Send To Me</p>
-						<ArrowIcon />
 					</a>
 				</div>
-				<DoodleForm status={this.state.formActive} />
 			</div>
 		)
 	}
 }
 
-export default connect(mapStateToProps)(DoodleView)
+export default mapStateToProps(DoodleView)
