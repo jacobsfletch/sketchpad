@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
 
-//import ArrowIcon from '../../icons/arrow'
+import './Sketchpad.css'
 
-//import './Sketchpad.css'
-
-const mapStateToProps = state => {
-	return {
-		viewportSize: state.specs.viewportSize
-	}
-}
-
-class DoodleView extends Component {
+class Sketchpad extends Component {
 
 	constructor(props) {
 		super(props)
@@ -28,10 +20,7 @@ class DoodleView extends Component {
 			canvasActive: false,
 			doodleSent: false,
 			touchStart: 0,
-			viewportSize: {
-				width: 0,
-				height: 0
-			},
+			viewportSize: {},
 			canvasSize: {
 				width: 0,
 				height: 0
@@ -45,27 +34,24 @@ class DoodleView extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.viewportSize !== nextProps.viewportSize) {
-			this.setState({ viewportSize: nextProps.viewportSize })
+			const newState = {...this.state}
+			newState.viewportSize = nextProps.viewportSize
+			this.setState({...newState})
 			this.setCanvasSize()
 		}
 	}
 
 	setCanvasSize() {
-		const canvasWidth = this.canvasRef.clientWidth
-		const canvasHeight = this.canvasRef.clientHeight
-		this.canvasRef.width = canvasWidth
-		this.canvasRef.height = canvasHeight
-		this.setState({
-			canvasSize: {
-				width: canvasWidth,
-				height: canvasHeight
-			},
-			canvasActive: false
-		})
+		const newState = {...this.state}
+		newState.canvasSize = {
+			width: this.canvasRef.clientWidth,
+			height: this.canvasRef.canvasHeight
+		}
+		newState.canvasActive = false
+		this.setState({...newState})
 	}
 
 	componentDidMount() {
-		this.setState({ viewportSize: this.props.viewportSize })
 		this.setCanvasSize()
 		this.ctx = this.canvasRef.getContext('2d')
 	}
@@ -122,16 +108,6 @@ class DoodleView extends Component {
 	}
 
 	render() {
-		const toolbeltClasses = this.state.canvasActive
-			? 'sketchpad-toolbelt active'
-			: 'sketchpad-toolbelt'
-		const titleClasses = (this.state.canvasActive && !this.state.doodleSent)
-			? 'sketchpad-title deactive'
-			: 'sketchpad-title'
-		const confirmClasses = this.state.doodleSent
-			? 'sketchpad-confirm'
-			: 'sketchpad-confirm deactive'
-
 		return (
 			<div className={this.state.canvasActive ? 'sketchpad active' : 'sketchpad'}>
 				<canvas
@@ -145,17 +121,9 @@ class DoodleView extends Component {
 					onTouchMove={this.onMove}
 					onTouchEnd={this.onUp}
 				/>
-				<p className={confirmClasses}>Your doodle has been sent!</p>
-				<p className={titleClasses}>Start drawing</p>
-				<div className={toolbeltClasses}>
-					<button onClick={(e) => this.setCanvasSize()}>&nbsp;clear&nbsp;</button>
-					<a onClick={(e) => this.sendSketch(e)}>
-						<p className="button-title">Send To Me</p>
-					</a>
-				</div>
 			</div>
 		)
 	}
 }
 
-export default mapStateToProps(DoodleView)
+export default Sketchpad

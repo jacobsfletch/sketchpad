@@ -1,4 +1,18 @@
-@import "../../../sassafras/index.scss";
+@import "../sassafras/index.scss";
+
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+#root {
+	height: 100%;
+}
 
 .sketchpad {
 	width: 100%;

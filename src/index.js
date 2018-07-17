@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sketchpad from './components/Sketchpad';
 
-ReactDOM.render(<Sketchpad />, document.getElementById('root'));
+import App from './components/App.js';
+
+ReactDOM.render(<App />, document.getElementById('root'));
