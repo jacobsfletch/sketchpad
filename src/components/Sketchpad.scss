@@ -17,8 +17,10 @@ body {
 .sketchpad {
 	width: 100%;
 	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 	position: relative;
-	cursor: pointer;
+	cursor: crosshair;
 	color: black;
 
 	.sketchpad-title,
@@ -41,7 +43,7 @@ body {
 
 .sketchpad-canvas {
 	width: 100%;
-	height: 100%;
+	flex-grow: 1;
 	user-select: none;
 
 	&.deactive {
