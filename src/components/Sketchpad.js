@@ -23,31 +23,14 @@ class Sketchpad extends Component {
 		this.orientationTicker = 0
 
 		// initialize cursor stuff
-		// this.isMouseDown = false
+		this.isMouseDown = false
 		// this.touchMoveTicker = 0
-		// this.lastCursorX = 0
-		// this.lastCursorY = 0
-		// this.touchStart = 0
+		this.lastCursorX = 0
+		this.lastCursorY = 0
 
 		// initialize drawing styles
 		this.lineWidth = 10
 		this.lineColor = 'black'
-
-		this.userWheeled = {
-			ticker: 0,
-			deltaY: 0
-		}
-
-		this.userTouchMoved = {
-			ticker: 0,
-			thisSrroll: 0,
-			nextScroll: 0
-		}
-
-		this.startCoords = {
-			x: 0,
-			y: 0
-		}
 
 		// initialize local state
 		this.state = {
@@ -179,6 +162,9 @@ class Sketchpad extends Component {
 					onTouchMove={this.onMove}
 					onTouchEnd={this.onUp}
 				/>
+				<div className="sketchpad-onboard">
+					<p>Start Drawing</p>
+				</div>
 			</div>
 		)
 	}

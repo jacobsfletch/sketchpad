@@ -17,20 +17,6 @@ body {
   position: relative;
   cursor: crosshair;
   color: black; }
-  .sketchpad .sketchpad-title,
-  .sketchpad .sketchpad-confirm {
-    text-transform: lowercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    display: block;
-    z-index: -1; }
-    .sketchpad .sketchpad-title.deactive,
-    .sketchpad .sketchpad-confirm.deactive {
-      display: none; }
 
 .sketchpad-canvas {
   width: 100%;
@@ -39,35 +25,10 @@ body {
   .sketchpad-canvas.deactive {
     background-image: none; }
 
-.sketchpad-toolbelt {
+.sketchpad-onboard {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  display: none; }
-  .sketchpad-toolbelt.active {
-    display: block; }
-  .sketchpad-toolbelt button, .sketchpad-toolbelt a {
-    font-family: "Source Code Pro", sans-serif;
-    font-size: 0.9375rem;
-    line-height: 1.125rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: black;
-    background-color: transparent;
-    padding: 0.5625rem 0.75rem;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer; }
-    .sketchpad-toolbelt button:last-child:hover, .sketchpad-toolbelt a:last-child:hover {
-      font-weight: 500; }
-    .sketchpad-toolbelt button:first-child, .sketchpad-toolbelt a:first-child {
-      opacity: .5;
-      border: 0; }
-      .sketchpad-toolbelt button:first-child:hover, .sketchpad-toolbelt a:first-child:hover {
-        opacity: 1; }
-      .sketchpad-toolbelt button:first-child::before, .sketchpad-toolbelt a:first-child::before {
-        content: '[ '; }
-      .sketchpad-toolbelt button:first-child::after, .sketchpad-toolbelt a:first-child::after {
-        content: ' ]'; }
-    .sketchpad-toolbelt button > *:first-child, .sketchpad-toolbelt a > *:first-child {
-      margin-right: 0.9375rem; }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%; }
