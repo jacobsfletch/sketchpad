@@ -8,8 +8,7 @@ class Sketchpad extends Component {
 		super(props)
 
 		// bind the context of user events to their event handlers
-		this.measureViewportSize = this.measureViewportSize.bind(this)
-		this.measureCanvasSize = this.measureCanvasSize.bind(this)
+		this.onResize = this.onResize.bind(this)
 		// this.onOrientationChange = this.onOrientationChange.bind(this)
 		this.onTouchMove = this.onTouchMove.bind(this)
 		this.onDown = this.onDown.bind(this)
@@ -18,7 +17,6 @@ class Sketchpad extends Component {
 
 		// initialize generals
 		this.isTouchDevice = false
-		// this.canvasActive = false
 		// this.pixelRatio = 0
 		this.orientationTicker = 0
 
@@ -34,6 +32,7 @@ class Sketchpad extends Component {
 
 		// initialize local state
 		this.state = {
+			canvasActive: false,
 			viewportSize: {
 				width: 0,
 				height: 0
@@ -50,27 +49,22 @@ class Sketchpad extends Component {
 			this.isTouchDevice = true
 		}
 
-		// Measure viewport and canvas
-		this.measureCanvasSize()
-		this.measureViewportSize()
+		// Measure viewport, which also sets the canvas size
+		// equal to the referenced canvas element in the DOM
+		this.onResize()
 
 		// Establish canvas context
 		this.ctx = this.canvasRef.getContext('2d')
 
 		// Create event listeners
-		window.addEventListener('resize', this.measureViewportSize, false)
+		window.addEventListener('resize', this.onResize, false)
 		// window.addEventListener('orientationchange', this.onOrientationChange, false)
 		window.addEventListener('touchmove', this.onTouchMove, {passive: false})
 	}
 
-	measureCanvasSize() {
-		// this.canvasActive = false
-		this.canvasRef.width = this.canvasRef.clientWidth
-		this.canvasRef.height = this.canvasRef.clientHeight
-	}
-
-	measureViewportSize(e) {
+	onResize() {
 		this.setState({
+			canvasActive: false,
 			viewportSize: {
 				width: window.innerWidth,
 				height: window.innerHeight
@@ -87,10 +81,9 @@ class Sketchpad extends Component {
 
 	onDown(e) {
 		// Prevent default mouse reaction
-		e.preventDefault()
+		//e.preventDefault()
 
-		// Activate canvas and open the onMove mouse event
-		this.canvasActive = true
+		// Open the onMove mouse event
 		this.isMouseDown = true
 
 		// Define line styles (must be defined before every draw)
@@ -98,6 +91,9 @@ class Sketchpad extends Component {
 		this.ctx.lineCap = 'round'
 		this.ctx.lineWidth = this.lineWidth
 		this.ctx.strokeStyle = this.lineColor
+
+		// Activate the canvas
+		this.activateCanvas()
 
 		// Begin drawing a new line by passing
 		// the second argument as true
@@ -128,6 +124,12 @@ class Sketchpad extends Component {
 		return { x, y }
 	}
 
+	activateCanvas() {
+		const newState = {...this.state}
+		newState.canvasActive = true
+		this.setState(newState)
+	}
+
 	drawLine(e, isNewLine) {
 		// Establish connection with canvas
 		this.ctx.beginPath()
@@ -148,9 +150,27 @@ class Sketchpad extends Component {
 		this.lastCursorY = cursor.y
 	}
 
+	downloadDrawing(e) {
+		return
+	}
+
+	colorChange(e) {
+		this.lineColor = e.target.value
+	}
+
+	widthChange(e) {
+		this.lineWidth = e.target.value
+		this.lineWidthInputValue = `${this.lineWidth}px`
+	}
+
 	render() {
+		const computedCanvasSize = this.canvasRef ? this.canvasRef.getBoundingClientRect() : {}
 		return (
-			<div className={this.canvasActive ? 'sketchpad active' : 'sketchpad'}>
+			<div className={this.state.canvasActive ? 'sketchpad active' : 'sketchpad'}>
+				<div className="sketchpad-onboard">
+					<h3>Drawing Anything</h3>
+					<p>Begin by clicking or touching anywhere in the viewport.</p>
+				</div>
 				<canvas
 					ref={(canvas) => { this.canvasRef = canvas }}
 					className='sketchpad-canvas'
@@ -161,9 +181,14 @@ class Sketchpad extends Component {
 					onTouchStart={this.onDown}
 					onTouchMove={this.onMove}
 					onTouchEnd={this.onUp}
+					width={computedCanvasSize.width}
+					height={computedCanvasSize.height}
 				/>
-				<div className="sketchpad-onboard">
-					<p>Start Drawing</p>
+				<div className={this.state.canvasActive ? 'sketchpad-controls' : 'sketchpad-controls inactive'}>
+					<button className="button-clear" onClick={(e) => this.onResize()}>Clear</button>
+					<a download className="button-download" onClick={(e) => this.downloadDrawing(e)}>Download</a>
+					<input type="color" onChange={(e) => this.colorChange(e)} />
+					<input type="number" max="1000" placeholder="Line Weight" value={this.lineWidthInputValue} onChange={(e) => this.widthChange(e)} />
 				</div>
 			</div>
 		)

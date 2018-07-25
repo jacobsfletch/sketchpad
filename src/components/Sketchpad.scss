@@ -1,5 +1,8 @@
 @import "../sassafras/index.scss";
 
+* {
+	box-sizing: border-box;
+}
 
 html,
 body {
@@ -16,29 +19,85 @@ body {
 
 .sketchpad {
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	position: relative;
 	cursor: crosshair;
 	color: black;
+
+	&.active {
+		.sketchpad-onboard {
+			display: none;
+		}
+	}
 }
 
 .sketchpad-canvas {
 	width: 100%;
-	flex-grow: 1;
+	flex: 1;
 	user-select: none;
-
-	&.deactive {
-		background-image: none;
-	}
+	position: relative;
+	z-index: 1;
 }
 
 .sketchpad-onboard {
+	padding: size(m);
+	width: 100%;
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 50%;
-	height: 50%;
+	top: 0;
+}
+
+.sketchpad-controls {
+	display: flex;
+	align-items: center;
+	padding: size(m);
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	z-index: 1;
+
+	> * {
+		margin-right: size(m);
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	&.inactive {
+		display: none;
+	}
+}
+
+.button-download,
+.button-clear {
+	@include type(p);
+	padding: size(xxs) size(m);
+	border: line(xxs) solid color(neutral, 3);
+}
+
+.button-download {
+	background-color: color(primary, 1);
+}
+
+.button-clear {
+
+}
+
+input {
+	-webkit-appearance: none;
+	border: line(xxs) solid color(neutral, 3);
+	height: size(xl);
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type='color'] {
+	background-color: transparent;
+	width: size(xl);
+	padding: 0;
+}
+
+input[type='number'] {
+	padding: 0 size(m);
 }
