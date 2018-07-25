@@ -151,7 +151,8 @@ class Sketchpad extends Component {
 	}
 
 	downloadDrawing(e) {
-		return
+		const dataURL = this.canvasRef.toDataURL('image/png');
+		e.target.href = dataURL;
 	}
 
 	colorChange(e) {
