@@ -1,24 +1,25 @@
 {
-  "name": "sketchpad",
-  "version": "2.0.0",
-  "description": "A sketchpad built on React and the html canvas",
-  "main": "index.js",
-  "scripts": {
-    "test": "console.log('success')"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jacobsfletch/sketchpad.git"
-  },
-  "keywords": [
-    "react",
-    "sketchpad",
-    "canvas"
-  ],
-  "author": "Jacob Fletcher",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jacobsfletch/sketchpad/issues"
-  },
-  "homepage": "https://github.com/jacobsfletch/sketchpad#readme"
+	"name": "sketchpad",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-scripts": "2.1.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
 }

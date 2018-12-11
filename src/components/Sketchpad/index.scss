@@ -1,0 +1,29 @@
+@import '../../scss/_styles';
+
+.sketchpad {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .header-header {
+    background-color: $green;
+    color: $red;
+  }
+  
+  .sketchpad-canvas {
+    opacity: .2;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    background-color: whitesmoke;
+    
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .sketchpad-controls {
+    position: absolute;
+    bottom: 0;
+  }
+}
